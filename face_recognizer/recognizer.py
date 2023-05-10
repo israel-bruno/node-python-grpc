@@ -16,10 +16,11 @@ def recognizeFace(name, base64image) -> str:
 
     knownEncodings = [face[1] for face in knownFaces]
 
-    for idx, encoding in enumerate(faceEncodings):
+    for encoding in faceEncodings:
         result = compare_faces(knownEncodings, encoding)
         if not True in result:
             knownFaces.append((name, encoding))
             return "Rosto não conhecido encontrado, salvando registros"
 
+        idx = result.index(True)
         return f"Rosto conhecido encontrado. Nome: {knownFaces[idx][0]}"
